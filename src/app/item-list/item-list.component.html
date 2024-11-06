@@ -4,11 +4,11 @@
     <input type="text" [(ngModel)]="item.name" *ngIf="editIndex === i" />
     <span *ngIf="editIndex !== i" [class.purchased]="item.isPurchased">{{ item.name }}</span>
     <div class="divBotao">
-      <button *ngIf="editIndex !== i" (click)="toggleItemPurchased(i)">
+      <button *ngIf="editIndex !== i" (click)="toggleItemPurchased(item.id)">
         <i class="fas" [ngClass]="item.isPurchased ? 'fa-undo' : 'fa-check'"></i> 
         {{ item.isPurchased ? 'Desmarcar' : 'Marcar como Comprado' }}
       </button>   
-      <button *ngIf="editIndex !== i" (click)="remove.emit(i)">
+      <button *ngIf="editIndex !== i" (click)="removeItem(item.id)">
         <i class="fas fa-trash"></i> Remover
       </button>
       <button *ngIf="editIndex !== i" (click)="editItem(i)">
@@ -30,11 +30,11 @@
     <input type="text" [(ngModel)]="item.name" *ngIf="editIndex === i" />
     <span *ngIf="editIndex !== i" [class.purchased]="item.isPurchased">{{ item.name }}</span>
     <div class="divBotao">
-      <button *ngIf="editIndex !== i" (click)="toggleItemPurchased(i)">
+      <button *ngIf="editIndex !== i" (click)="toggleItemPurchased(item.id)">
         <i class="fas" [ngClass]="item.isPurchased ? 'fa-undo' : 'fa-check'"></i> 
         {{ item.isPurchased ? 'Desmarcar' : 'Marcar como Comprado' }}
       </button>
-      <button *ngIf="editIndex !== i" (click)="remove.emit(i)">
+      <button *ngIf="editIndex !== i" (click)="removeItem(item.id)">
         <i class="fas fa-trash"></i> Remover
       </button>
       <button *ngIf="editIndex !== i" (click)="editItem(i)">

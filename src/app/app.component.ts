@@ -3,7 +3,8 @@ import { AddItemFormComponent } from './add-item-form/add-item-form.component';
 import { ItemListComponent } from './item-list/item-list.component';
 import { CommonModule } from '@angular/common';
 
-interface Item {
+export interface Item {
+  id: number;
   name: string;
   isPurchased: boolean;
 }
@@ -17,20 +18,23 @@ interface Item {
 })
 export class AppComponent {
   title = 'lista-supermercado';
-
   items: Item[] = [];
+  nextId = 1;
 
   addItem(itemName: string) {
     if (itemName) {
-      this.items.push({ name: itemName, isPurchased: false });
+      this.items.push({ id: this.nextId++, name: itemName, isPurchased: false });
     }
   }
 
-  removeItem(index: number) {
-    this.items.splice(index, 1);
+  removeItem(id: number) {
+    this.items = this.items.filter(item => item.id !== id);
   }
 
-  toggleItemPurchased(index: number): void {
-    this.items[index].isPurchased = !this.items[index].isPurchased;
+  toggleItemPurchased(id: number): void {
+    const item = this.items.find(item => item.id === id);
+    if (item) {
+      item.isPurchased = !item.isPurchased;
+    }
   }
 }

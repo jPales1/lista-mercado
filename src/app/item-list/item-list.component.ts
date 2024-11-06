@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Item } from '../app.component';
 
 @Component({
   selector: 'app-item-list',
@@ -9,8 +10,9 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './item-list.component.html',
   styleUrls: ['./item-list.component.css']
 })
+
 export class ItemListComponent {
-  @Input() items: any[] = [];
+  @Input() items: Item[] = [];
   @Output() remove = new EventEmitter<number>();
   @Output() togglePurchased = new EventEmitter<number>();
 
@@ -36,7 +38,11 @@ export class ItemListComponent {
     return this.items.filter(item => !item.isPurchased);
   }
 
-  toggleItemPurchased(index: number): void {
-    this.items[index].isPurchased = !this.items[index].isPurchased;
+  toggleItemPurchased(id: number): void {
+    this.togglePurchased.emit(id);
+  }
+
+  removeItem(id: number): void {
+    this.remove.emit(id);
   }
 }
